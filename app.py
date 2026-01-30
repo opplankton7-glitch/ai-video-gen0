@@ -18,21 +18,20 @@ if st.button("Generate Video"):
         with st.spinner("Lagi ngerjain... Proses ini makan waktu 1-2 menit ya!"):
             try:
                 # Menggunakan model Stable Video Diffusion atau sejenisnya
-                output = replicate.run(
+             # Ganti blok replicate.run kamu dengan ini:
+output = replicate.run(
     "lucataco/animate-diff:be113c56d53e144333688e21cc0d984381005f1f96409d9494a37c040d346cc0",
     input={
         "prompt": f"{prompt}, funny animation style, cute, high quality",
         "guidance_scale": 7.5,
         "num_inference_steps": 25,
-        "num_frames": 16,
-                    input={
-                        "input_image": "https://replicate.delivery/pbxt/JU9P9p9H9G9G9G9G9G9G9G9G/example.png", # Ini butuh image input untuk SVD
-                        "video_length": "25_frames_with_svd_xt"
-                    }
-                )
-                # Catatan: Untuk Text-to-Video murni, model 'lucataco/animate-lcm' lebih disarankan
-                st.video(output)
-            except Exception as e:
-                st.error(f"Error: {e}")
+        "num_frames": 16  # Ini akan menghasilkan video pendek yang stabil
+    }
+)
+
+# Karena output model ini biasanya langsung berupa URL string atau list, 
+# kita pastikan cara nampilinnya begini:
+video_url = output[0] if isinstance(output, list) else output
+st.video(video_url)
     else:
         st.warning("Isi dulu prompt-nya bos!")
