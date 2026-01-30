@@ -19,7 +19,12 @@ if st.button("Generate Video"):
             try:
                 # Menggunakan model Stable Video Diffusion atau sejenisnya
                 output = replicate.run(
-                    "stability-ai/stable-video-diffusion:3f0457148a04595e21f35f5accf8974551ec46820a2736183e936b8567584f58",
+    "lucataco/animate-diff:be113c56d53e144333688e21cc0d984381005f1f96409d9494a37c040d346cc0",
+    input={
+        "prompt": f"{prompt}, funny animation style, cute, high quality",
+        "guidance_scale": 7.5,
+        "num_inference_steps": 25,
+        "num_frames": 16,
                     input={
                         "input_image": "https://replicate.delivery/pbxt/JU9P9p9H9G9G9G9G9G9G9G9G/example.png", # Ini butuh image input untuk SVD
                         "video_length": "25_frames_with_svd_xt"
